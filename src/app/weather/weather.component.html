@@ -32,6 +32,9 @@
       <div style="text-align: left; font-size: 20px; margin-top: 5px">
         {{ countries.length > 0 ? countries[0].name : 'Philippines' }} <!-- Display fetched country or default -->
       </div>
+      <div class="countryFlag" style="background-color: rgb(168, 163, 163); border-radius: 14px; width: 100%; height: 100px; margin-top: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);"> <!-- Added box-shadow for border shadow -->
+        <img src="flags/ph.svg" alt="Philippines Flag" style="width: 100%; height: 100%; object-fit: cover;" /> 
+      </div>
     </div>
   </div>
 
@@ -187,16 +190,17 @@
 
     <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-left: 20px; margin-right: 20px;">
       <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
-        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">UV Index</h2>
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px; text-align: left;">UV Index</h2>
       </div>
       <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
-        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Wind Status</h2>
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px; text-align: left;">Heat Index</h2> <!-- Centered header -->
+        <div style="text-align: center; font-size: 40px; font-weight: bold;">NORMAL</div> <!-- Added 'Normal' centered -->
       </div>
       <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
         <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Sunrise & Sunset</h2>
         <div style="display: flex; flex-direction: column; justify-content: center; align-items: left; margin-left: 15px; margin-top: -25px;">
-          <div style="display: flex; align-items: center;">
-            <img src="arrow_up.png" alt="Sunrise" style="width: 30px; height: 30px; margin-right: 5px;" />
+          <div style="display: flex; align-items: center; margin-bottom: -5px;">
+            <img src="arrow_up.png" alt="Sunrise" style="width: 30px; height: 30px; margin-right: 5px; " />
             <div style="font-size: 20px; font-weight: bold;">6:00 AM</div> &nbsp;+3 mins
           </div>
           <div style="display: flex; align-items: center;">
@@ -213,6 +217,9 @@
       </div>
       <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
         <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Rain Chance</h2>
+        <div style="text-align: center; font-size: 40px; font-weight: bold;">
+          <i class="fa fa-arrow-down" aria-hidden="true"></i> 30% <!-- Added down arrow icon and 30% text -->
+        </div>
       </div>
     </div>
 

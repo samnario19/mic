@@ -16,7 +16,8 @@
 
 .card .left-section {
     flex: 1;               /* Left section takes 1 part */
-    padding-right: 10px;  /* Space between sections */
+    padding-right: 10px;
+    margin-right: 20px;  /* Space between sections */
 }
 
 .card .right-section {
