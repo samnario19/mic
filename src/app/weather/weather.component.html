@@ -1,0 +1,212 @@
+<!-- Add the white card structure -->
+<div class="card" style="font-family: Arial">
+  <!-- Added font-family for Arial -->
+  <div class="left-section">
+    <div
+      class="search-container"
+      style="display: flex; align-items: center; gap: 8px"
+    >
+      <!-- Added flex and gap for alignment -->
+      <input type="text" placeholder="Search Country" class="search-bar" [(ngModel)]="searchQuery" /> <!-- Two-way binding for search query -->
+      <i class="fa fa-search search-icon" (click)="onSearch()"></i> <!-- Trigger search on icon click -->
+      <i class="fa fa-map-marker location-icon" (click)="getCurrentLocation()"></i> <!-- Trigger location fetch on icon click -->
+      <!-- Removed margin for spacing -->
+    </div>
+    <img
+      [src]="getImageForTemperature(baseTemperatureCelsius)"
+      alt="Weather"
+      class="sunny-image"
+      style="width: 80%; margin-top: 10px"
+    />
+    <!-- Updated image size -->
+    <div class="info" style="margin-left: 20px">
+      <div class="temperature" style="text-align: left; font-size: 60px">
+        {{ getTemperature(baseTemperatureCelsius) }}
+        <!-- Dynamic temperature display -->
+      </div>
+      <!-- Moved temperature display below the image -->
+      <div style="text-align: left; font-size: 20px; margin-top: 5px">
+        {{ dateTime }}
+      </div>
+      <!-- Updated to use dateTime property -->
+      <div style="text-align: left; font-size: 20px; margin-top: 5px">
+        {{ countries.length > 0 ? countries[0].name : 'Philippines' }} <!-- Display fetched country or default -->
+      </div>
+    </div>
+  </div>
+
+  <div class="right-section">
+    <div
+      class="weektodaybutton"
+      style="margin-left: 20px; margin-top: 15px; display: flex; gap: 10px"
+    >
+      <!-- Added flex and gap for modern layout -->
+      <button
+        (click)="toggleView()"
+        [class.active]="isToday"
+        class="btn-modern"
+        style="
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          background-color: #007bff;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        "
+      >
+        Today
+      </button>
+      <!-- Styled button for Today -->
+      <button
+        (click)="toggleView()"
+        [class.active]="!isToday"
+        class="btn-modern"
+        style="
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          background-color: #6c757d;
+          color: white;
+          font-weight: bold;
+          cursor: pointer;
+          transition: background-color 0.3s;
+        "
+      >
+        Week
+      </button>
+      <!-- Styled button for Week -->
+    </div>
+
+    <!-- Content for the right section -->
+    <div style="text-align: right; margin-top: -35px; margin-right: 20px">
+      <!-- Added toggle switch container -->
+      <label class="switch">
+        <input type="checkbox" id="tempToggle" (change)="toggleTemperature()" />
+        <!-- Use (change) instead of onchange -->
+        <span class="slider round">
+          <span class="label-celsius">ºC</span>
+          <span class="label-fahrenheit">ºF</span>
+        </span>
+      </label>
+    </div>
+
+    <!-- Conditional rendering based on isToday -->
+    <div *ngIf="isToday; else weekCards">
+      <div
+        style="
+          display: flex;
+          gap: 10px;
+          margin-top: 10px;
+          margin-left: 20px;
+          margin-right: 20px;
+        "
+      >
+        <!-- Added flex container for today cards -->
+        <div
+          class="small-card"
+          *ngFor="let hour of getLastSevenHours()"
+          style="
+            width: 100%;
+            height: 140px;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            line-height: 50px;
+            border-radius: 14px;
+          "
+        >
+          <div style="text-align: center; font-size: 16px; margin-bottom: -1px">
+            {{ hour.time }}
+          </div>
+          <!-- Display hour -->
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-top: 0;
+            "
+          >
+            <img [src]="hour.image || 'cloudyandsunny.png'" alt="Weather" style="width: 50px; height: 50px" />
+          </div>
+          <div style="font-size: 16px">{{ hour.temperature }}</div>
+          <!-- Use default image if hour.image is not available -->
+        </div>
+        <!-- Today cards generated dynamically -->
+      </div>
+      
+      <!-- Updated header alignment to left -->
+    </div>
+    <ng-template #weekCards>
+      <div
+        style="
+          display: flex;
+          gap: 10px;
+          margin-top: 10px;
+          margin-left: 20px;
+          margin-right: 20px;
+        "
+      >
+        <!-- Added flex container for week cards -->
+        <div
+          class="small-card"
+          *ngFor="let day of getWeekDays()"
+          style="
+            width: 100%;
+            height: 140px;
+            background-color: rgb(255, 255, 255);
+            text-align: center;
+            line-height: 50px;
+            border-radius: 14px;
+          "
+        >
+          <div style="text-align: center; font-size: 16px; margin-bottom: -1px">
+            {{ day.name }} <!-- Display shortened day name -->
+          </div>
+          <!-- Display day -->
+          <div
+            style="
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              margin-top: 0;
+            "
+          >
+            <img [src]="day.image" alt="Weather" style="width: 50px; height: 50px" />
+          </div>
+          <div style="font-size: 16px">
+            {{ getTemperature(day.temperature) }} <!-- Use the updated getTemperature method -->
+          </div>
+        </div>
+        <!-- Week cards generated dynamically -->
+      </div>
+    </ng-template>
+
+    <h2 style="margin-top: 20px; text-align: left; margin-left: 20px;">Today's Highlights</h2>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-left: 20px; margin-right: 20px;">
+      <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">UV Index</h2>
+      </div>
+      <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Wind Status</h2>
+      </div>
+      <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Sunrise & Sunset</h2>
+      </div>
+      <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Humidity</h2>
+      </div>
+      <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Visibility</h2>
+      </div>
+      <div class="highlight-card" style="width: calc(33.33% - 10px); height: 140px; background-color: rgb(255, 255, 255); line-height: 50px; border-radius: 14px;">
+        <h2 style="margin-left: 10px; margin-top: 0px; color: rgb(104, 101, 101); font-size: 16px;">Rain Chance</h2>
+      </div>
+    </div>
+
+
+    <!-- Display search results -->
+  </div>
+</div>

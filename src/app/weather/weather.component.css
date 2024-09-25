@@ -1,0 +1,161 @@
+/* Add styles for the white card */
+.card {
+    display: flex;          /* Use flexbox for layout */
+    background-color: rgb(253, 252, 252); /* White background */
+    border-radius: 14px;    /* Rounded corners */
+    margin: auto;           /* Center the card */
+    padding: 20px;         /* Add some padding */
+    width: 60%;            /* Set width as needed */
+    height: 60%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    position: absolute;     /* Positioning for centering */
+    top: 50%;               /* Move down 50% from the top */
+    left: 50%;              /* Move right 50% from the left */
+    transform: translate(-50%, -50%); /* Center the card */
+}
+
+.card .left-section {
+    flex: 1;               /* Left section takes 1 part */
+    padding-right: 10px;  /* Space between sections */
+}
+
+.card .right-section {
+    flex: 2;               /* Right section takes 2 parts */
+    background-color: rgb(224, 217, 217); /* Set background color to light gray */
+}
+
+/* Add hover effect for cards in the right section */
+.card .small-card {
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.card .small-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Add hover effect for highlight cards */
+.highlight-card {
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition for hover effect */
+}
+
+.highlight-card:hover {
+    transform: scale(1.05); /* Slightly enlarge the card on hover */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+/* Add styles for the search bar */
+.search-bar {
+    border: none;                /* Remove default border */
+    border-radius: 20px;        /* Rounded corners */
+    padding: 10px 15px;         /* Add padding */
+    width: 75%;                /* Full width */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: box-shadow 0.3s; /* Smooth transition for focus */
+}
+
+.search-bar:focus {
+    outline: none;              /* Remove outline */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on focus */
+}
+
+/* Add styles for the search and location icons */
+.search-icon, .location-icon {
+    font-size: 24px;          /* Enlarge the icons */
+    color: rgb(141, 135, 135);         /* Set icon color to light gray */
+    transition: color 0.3s;   /* Smooth transition for hover effect */
+}
+
+.search-icon:hover, .location-icon:hover {
+    color: darkgray;          /* Change color on hover */
+}
+
+/* Add styles for the sunny image */
+.sunny-image {
+    display: block;           /* Make the image a block element */
+    margin: 10px auto;      /* Center the image horizontally */
+    width: 80%;              /* Keep the width as needed */
+}
+
+/* Add this CSS to your styles */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Positioning the labels inside the circle */
+.label-celsius, .label-fahrenheit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: black; /* Change to desired color */
+    transition: opacity 0.4s;
+}
+
+.label-celsius {
+    opacity: 1; /* Show when unchecked */
+}
+
+.label-fahrenheit {
+    opacity: 0; /* Hide when unchecked */
+}
+
+input:checked + .slider .label-celsius {
+    opacity: 0; /* Hide when checked */
+}
+
+input:checked + .slider .label-fahrenheit {
+    opacity: 1; /* Show when checked */
+}
+
+/* Adjust label positioning */
+.slider .label-celsius {
+    left: 25%; /* Adjust to center inside the circle */
+}
+
+.slider .label-fahrenheit {
+    left: 75%; /* Adjust to center inside the circle */
+}
+
